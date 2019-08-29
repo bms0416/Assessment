@@ -1,0 +1,57 @@
+Intro
+My background is as a backend developer. As such, I have not had any experience with REST. I have implemented a backend api that could have a from end attached to it using a RESTful interface. It is structure in a CRUD design.
+
+This is a simple implementation of a bank. The idea behind this is the user of the api will be running multiple banks at once. Each bank will have multiple accounts and each account will have multiple transactions. The external interface to this will all be through the Bank class. The Bank class has 2 embedded classes for accounts and transactions.
+
+public class Bank {
+	enum TRANS_TYPE {OPEN, CLOSE, DEPOSIT, WITHDRAW, TRANSFER_FROM, TRANSFER_TO;}
+	enum ACCOUNT_STATUS {OPEN, CLOSED;}
+	enum STATUS {SUCCESS, FAILURE};
+		
+	public class Transaction {
+		public Transaction(TRANS_TYPE t, double a) 
+		public Transaction(TRANS_TYPE t)
+		public Transaction()
+	}
+
+	private class Account {
+		public double getBalance()
+		public Transaction getTransaction(int id)
+		public Account()
+		public void deposit(double amount)
+		public void withdraw(double amount)
+		public void transferTo(double amount)
+		public void transferFrom(double amount)
+		public void open()
+		public void close()
+		public ACCOUNT_STATUS getStatus()
+		public void putTransaction(Transaction t)
+		public Map<Integer, Transaction> getTransactions()
+		public Map<Integer, Transaction> getTransactions(Date start, Date end)
+	}
+
+	private Map<Integer, Account> accounts;
+		
+	public Bank()
+		
+	public int openAccount()
+This will be called to create a new account.
+	public double getBalance(int accountId)
+This gets the balance of the specified account
+	public Map<Integer, Transaction> getTransactions(int accountId)
+This gets all of the transactions for the specified account
+	public Map<Integer, Transaction> getTransactions(int accountId, Date start, Date end)
+This gets all of the transactions of the specified account within specified date range.
+	
+	public Transaction getTransaction(int accountId, int transactionId)
+This gets a specific transaction from a specific account
+	public STATUS deposit(int accountId, double amount)
+This deposits funds into a specified open account
+	public STATUS withdraw(int accountId, double amount)
+This withdraws funds if available from an open account
+
+	public STATUS transfer(int from, int to, double amount)
+This transfers funds, if available, from one open account to another open account
+	public void closeAccount(int accountId)
+This withdraws any funds in an open account and marks the account as closed. No further transactions are allowed on this account
+
